@@ -1,0 +1,15 @@
+SELECT
+    `webshop_category`.`webshop_category_id` AS `webshop_category_id`,
+    `translation_key`.`translation_key` AS `translation_key`,
+    `webshop_category`.`htaccess_url` AS `htaccess_url`,
+    `webshop_product`.`webshop_image_id-list` AS `webshop_image_id-list`
+FROM
+    `webshop_category`
+INNER JOIN `translation_key`
+	ON `webshop_category`.`translation_key_id` = `translation_key`.`translation_key_id`
+LEFT JOIN `webshop_product_category`
+	ON `webshop_category`.`webshop_category_id` = `webshop_product_category`.`webshop_category_id`
+INNER JOIN `webshop_product`
+	ON `webshop_product_category`.`webshop_product_id` = `webshop_product`.`webshop_product_id`
+GROUP BY
+    `webshop_category`.`webshop_category_id`
